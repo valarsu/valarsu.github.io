@@ -15,12 +15,28 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2017/02/index.html">
+<meta name="description" content="HTTP对我来说一直是弱项，所以最近看了很多相关资料，记录笔记如下，意在深入理解HTTP。
+
+HTTP简介
+HTTP协议是互联网上应用最为广泛的一种网络协议，也是浏览器和服务器通信时所采用的协议。在展示网页时，浏览器向服务器发起一个HTTP请求，以获取相应的网站数据，然后在客户端展示相应的内容。
+与HTTP协议紧密相关的还有HTTPS协议，它通过SSL和HTTP协议构建可进行加密传输、身份认证的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP笔记">
+<meta property="og:url" content="http://yoursite.com/2017/02/20/about-http/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="HTTP对我来说一直是弱项，所以最近看了很多相关资料，记录笔记如下，意在深入理解HTTP。
+
+HTTP简介
+HTTP协议是互联网上应用最为广泛的一种网络协议，也是浏览器和服务器通信时所采用的协议。在展示网页时，浏览器向服务器发起一个HTTP请求，以获取相应的网站数据，然后在客户端展示相应的内容。
+与HTTP协议紧密相关的还有HTTPS协议，它通过SSL和HTTP协议构建可进行加密传输、身份认证的">
+<meta property="og:updated_time" content="2017-02-19T16:08:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="HTTP笔记">
+<meta name="twitter:description" content="HTTP对我来说一直是弱项，所以最近看了很多相关资料，记录笔记如下，意在深入理解HTTP。
+
+HTTP简介
+HTTP协议是互联网上应用最为广泛的一种网络协议，也是浏览器和服务器通信时所采用的协议。在展示网页时，浏览器向服务器发起一个HTTP请求，以获取相应的网站数据，然后在客户端展示相应的内容。
+与HTTP协议紧密相关的还有HTTPS协议，它通过SSL和HTTP协议构建可进行加密传输、身份认证的">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -52,7 +68,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives: 2017/2 | Hexo</title>
+<title>HTTP笔记 | Hexo</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -62,8 +78,8 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -285,110 +301,198 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-about-http" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2017/02/20/about-http/" class="article-date">
+      <time datetime="2017-02-19T16:03:16.000Z" itemprop="datePublished">2017-02-20</time>
+</a>
+
+
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTP笔记
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/02/20/about-http/" class="archive-article-date">
-      <time datetime="2017-02-19T16:03:16.000Z" itemprop="datePublished">02-20</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/20/about-http/">HTTP笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
+    <div class="article-entry" itemprop="articleBody">
+      
           
+        <blockquote>
+<p>HTTP对我来说一直是弱项，所以最近看了很多相关资料，记录笔记如下，意在深入理解HTTP。</p>
+</blockquote>
+<h1 id="HTTP简介"><a href="#HTTP简介" class="headerlink" title="HTTP简介"></a>HTTP简介</h1><blockquote>
+<p>HTTP协议是互联网上应用最为广泛的一种网络协议，也是浏览器和服务器通信时所采用的协议。在展示网页时，浏览器向服务器发起一个HTTP请求，以获取相应的网站数据，然后在客户端展示相应的内容。</p>
+<p>与HTTP协议紧密相关的还有HTTPS协议，它通过SSL和HTTP协议构建可进行加密传输、身份认证的网络协议，能防止数据在传输过程中被挟持或篡改，可以看作是HTTP协议的安全版。</p>
+<p>HTTP是Web开发中必须掌握的技术，除了协议本身外，缓存机制、表单的method方法，跨域、网络安全等，都是在页面开发过程中涉及的网络相关的技术点。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h1><h2 id="每个状态码的含义"><a href="#每个状态码的含义" class="headerlink" title="每个状态码的含义"></a>每个状态码的含义</h2><ul>
+<li>1xx（临时响应）：表示临时响应并需要请求者继续执行操作</li>
+<li>2xx（成功）：表示成功处理了请求</li>
+<li>3xx（重定向）：表示要完成请求需要进一步操作，通常这些状态吗用来重定向</li>
+<li>4xx（错误）：表示请求可能出错，妨碍了服务器的处理</li>
+<li>5xx（服务器错误）：表示服务器在尝试处理请求时发生内部错误。</li>
+</ul>
+<h2 id="常用状态码："><a href="#常用状态码：" class="headerlink" title="常用状态码："></a>常用状态码：</h2><ul>
+<li>200（成功）：服务器已经成功处理了请求。通常这表示服务器提供了请求的页面</li>
+<li>304（未修改）：自从上次请求欧，请求的网页未修改过。服务器返回此响应时，不会返回网页内容</li>
+<li>401（未授权）：请求要求身份验证。队医需要登录的网页，服务器可能返回此响应</li>
+<li>403（禁止）：服务器拒绝请求</li>
+<li>404（未找到）：服务器找不到请求的网页</li>
+</ul>
+<h1 id="经典问题"><a href="#经典问题" class="headerlink" title="经典问题"></a>经典问题</h1><h2 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h2><p>HTTP协议是无状态的，为了保持用户会话状态使用了什么技术方案弥补？该技术方赞在用户禁用了cookie之后，还有什么方式实现（可不考虑安全性）？</p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>我们常用的保存会话状态的方式有cookie、session、URL GET参数：</p>
+<ol>
+<li>cookie是保存在浏览器终端内存或者磁盘上的一小块数据，只能保存字符串类型，所有的cookie信息都会随着浏览器的请求而发送。cookie分为：会话cookie：数据保存在内存中，浏览器关闭后将被清除；持久cookie：数据保存在磁盘中。尽管几乎所有浏览器都支持cookie，但是浏览器对单域下cookie的个数和每个key的长度都有限制。</li>
+<li>session是一种服务器端的机制，服务器使用一种类似于散列表的结构来保存信息，客户端需要接收、记忆和回送session的会话标识号，session通常是借助客户端存储的cookie来记录会话标识。</li>
+<li>GET参数是URL中的普通参数，GET方式是明文传输，其传送的数据量一般会有限制，美中浏览器支持的最大长度会略有不同。</li>
+</ol>
+<p>要实现保持用户状态，服务端在客户端第一次访问时会自动创建一个session来存储客户端的信息，同时生成一个唯一的key发送给客户端。</p>
+<ol>
+<li>客户端没有禁用cookie：服务器会在客户端cookie中写入一个key的值，用户保存用户信息，之后的每一次访问都会携带cookie给服务端，服务器可以根据这个值判断用户的唯一性</li>
+<li>客户端禁用了cookie：需要将验证信息写入URL中，所有的请求也需要携带这个参数，比如说<code>www.tfdd.com?session_id=xxxxx</code>，相对于cookie来说要麻烦一点，因为页面上所有的链接和请求都必须携带该参数，否则客户端会丢失会话状态</li>
+</ol>
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    
   </div>
+  
+    
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/02/16/closure/">
+                    我理解的闭包
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/02/16/closure/" class="archive-article-date">
-      <time datetime="2017-02-16T11:58:13.000Z" itemprop="datePublished">02-16</time>
-</a>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP简介"><span class="toc-number">1.</span> <span class="toc-text">HTTP简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP状态码"><span class="toc-number">2.</span> <span class="toc-text">HTTP状态码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#每个状态码的含义"><span class="toc-number">2.1.</span> <span class="toc-text">每个状态码的含义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用状态码："><span class="toc-number">2.2.</span> <span class="toc-text">常用状态码：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#经典问题"><span class="toc-number">3.</span> <span class="toc-text">经典问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题1"><span class="toc-number">3.1.</span> <span class="toc-text">问题1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解析"><span class="toc-number">3.1.1.</span> <span class="toc-text">解析</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
         </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/16/closure/">我理解的闭包</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/02/16/hello-world/" class="archive-article-date">
-      <time datetime="2017-02-16T11:53:33.000Z" itemprop="datePublished">02-16</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/16/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"HTTP笔记　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
     
 
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/20/about-http/" data-title="HTTP笔记" data-url="http://yoursite.com/2017/02/20/about-http/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"null"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/02/16/closure/" title="下一篇: 我理解的闭包">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/about-http/">HTTP笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/closure/">我理解的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
