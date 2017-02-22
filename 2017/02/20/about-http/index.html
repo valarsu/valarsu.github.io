@@ -29,7 +29,7 @@ HTTP协议是互联网上应用最为广泛的一种网络协议，也是浏览�
 HTTP简介
 HTTP协议是互联网上应用最为广泛的一种网络协议，也是浏览器和服务器通信时所采用的协议。在展示网页时，浏览器向服务器发起一个HTTP请求，以获取相应的网站数据，然后在客户端展示相应的内容。
 与HTTP协议紧密相关的还有HTTPS协议，它通过SSL和HTTP协议构建可进行加密传输、身份认证的">
-<meta property="og:updated_time" content="2017-02-19T16:08:03.000Z">
+<meta property="og:updated_time" content="2017-02-22T01:42:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP笔记">
 <meta name="twitter:description" content="HTTP对我来说一直是弱项，所以最近看了很多相关资料，记录笔记如下，意在深入理解HTTP。
@@ -346,10 +346,34 @@ HTTP协议是互联网上应用最为广泛的一种网络协议，也是浏览�
 <p>HTTP是Web开发中必须掌握的技术，除了协议本身外，缓存机制、表单的method方法，跨域、网络安全等，都是在页面开发过程中涉及的网络相关的技术点。</p>
 </blockquote>
 <a id="more"></a>
+<h1 id="TCP-IP协议族"><a href="#TCP-IP协议族" class="headerlink" title="TCP/IP协议族"></a>TCP/IP协议族</h1><blockquote>
+<p>TCP/IP协议族是网络通信需要的各种协议的统称。如从电缆的规格到IP地址的选当方法、寻找异地用户的方法、双方建立通信的顺序、Web页面显示需要处理的步骤等等。</p>
+</blockquote>
+<h2 id="分层管理"><a href="#分层管理" class="headerlink" title="分层管理"></a>分层管理</h2><ol>
+<li>应用层：决定向用户提供应用服务时通信的活动。比如FTP（文件传输协议）和DNS（域名系统）服务就是其中的两类应用。</li>
+<li>传输层：对应用层提供处于网络连接中的两台计算机之间的数据传输。传输层中有两个性质不同的协议，TCP（传输控制协议）和UDP（用户数据报协议）</li>
+<li>网络层（网络互联层）：处理在网络上流动的数据包（网络传输的最小数据单位）。规定了通过怎样的传输路线到达对方计算机，并把数据包传送给对方。</li>
+<li>数据链路层（网络接口层）：用来处理连接网络的硬件部分。包括控制操作系统、硬件的设备驱动、NIC（网卡）、光纤等物理可见部分。</li>
+</ol>
+<h2 id="TCP-IP通信传输流"><a href="#TCP-IP通信传输流" class="headerlink" title="TCP/IP通信传输流"></a>TCP/IP通信传输流</h2><blockquote>
+<p>应用层（HTTP协议）发送一个请求 <code>-&gt;</code> 传输层（TCP协议）把收到的数据（HTTP请求报文）进行分割，并在各报文上打标记序号及端口号 <code>-&gt;</code> 网络层（IP协议）增加作为通信目的地的MAC地址 <code>-&gt;</code> 链路层（网络） <code>-&gt;</code> 接收端以相反的方向进行。</p>
+</blockquote>
+<h2 id="IP、TCP和DNS"><a href="#IP、TCP和DNS" class="headerlink" title="IP、TCP和DNS"></a>IP、TCP和DNS</h2><ul>
+<li>IP：网络协议（不要把IP和IP地址搞混），位于网络层，作用是要把正确的数据包传送给对方，所以要满足各种条件，最重要的是IP地址（节点被分配到的地址）和MAC地址（网卡所属的固定地址）。网络传输时，要经过多台设备进行中转，中转过程中会用ARP协议根据IP地址解析出中专目标的MAC地址。</li>
+<li>TCP：位于传输层，提供可靠的字节流服务。为了传送大数据而把数据分割成以报文段为单位的数据包进行传输，并且能确定数据最终是否能到达。<ul>
+<li>三次握手：为了确保能把数据送到目的地，TCP使用flag：<code>SYN</code>和<code>ACK</code>进行三次握手。发送端先发送一个带SYN的数据包给对方，对方接收到后，会回发一个带有SYN/ACK的数据包表示接收到了，然后发送端再发送一个带ACK的数据包，代表握手结束。</li>
+</ul>
+</li>
+<li>DNS：和HTTP一样在应用层，负责域名解析。因为计算机识别IP地址比识别域名要容易，所以用DNS来将域名解析成IP地址，以供服务器识别。也可以通过IP反查域名。</li>
+</ul>
+<h2 id="URI和URL"><a href="#URI和URL" class="headerlink" title="URI和URL"></a>URI和URL</h2><ul>
+<li>URI：统一资源标识符，用字符串标识某个协议方案（HTTP、FTP、file等）标识的互联网资源</li>
+<li>URL：统一资源定位符，表示资源的地点（所以URL是URI的子集）</li>
+</ul>
 <h1 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h1><h2 id="每个状态码的含义"><a href="#每个状态码的含义" class="headerlink" title="每个状态码的含义"></a>每个状态码的含义</h2><ul>
 <li>1xx（临时响应）：表示临时响应并需要请求者继续执行操作</li>
 <li>2xx（成功）：表示成功处理了请求</li>
-<li>3xx（重定向）：表示要完成请求需要进一步操作，通常这些状态吗用来重定向</li>
+<li>3xx（重定向）：表示要完成请求需要进一步操作，通常这些状态码用来重定向</li>
 <li>4xx（错误）：表示请求可能出错，妨碍了服务器的处理</li>
 <li>5xx（服务器错误）：表示服务器在尝试处理请求时发生内部错误。</li>
 </ul>
@@ -371,6 +395,12 @@ HTTP协议是互联网上应用最为广泛的一种网络协议，也是浏览�
 <ol>
 <li>客户端没有禁用cookie：服务器会在客户端cookie中写入一个key的值，用户保存用户信息，之后的每一次访问都会携带cookie给服务端，服务器可以根据这个值判断用户的唯一性</li>
 <li>客户端禁用了cookie：需要将验证信息写入URL中，所有的请求也需要携带这个参数，比如说<code>www.tfdd.com?session_id=xxxxx</code>，相对于cookie来说要麻烦一点，因为页面上所有的链接和请求都必须携带该参数，否则客户端会丢失会话状态</li>
+</ol>
+<h2 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h2><p>URL输入浏览器到页面呈现，这中间发生了什么？</p>
+<h2 id="解析-1"><a href="#解析-1" class="headerlink" title="解析"></a>解析</h2><ol>
+<li>URL输入到浏览器，负责域名解析的DNS服务会通过域名查找对应的IP地址（也就是获得URL对应的IP地址）；</li>
+<li>利用TCP/IP协议族进行网络通信，发送数据包，建立网络连接。客户端会向服务端发送请求，服务端会响应客户端的请求。其中，客户端想浏览器发送请求，发送会经历应用层（HTTP报文）-&gt;传输层（增加TCP头部）-&gt;网络层（IP数据包，增加IP头部）-&gt;数据链路层（增加以太网头部）；服务端则相反。</li>
+<li>客户端渲染，渲染引擎对html进行转换，转化成能够被DOM处理的形式，接着转换成一个DOM树，在解析HTML的过程，会发送请求把对应的内容货渠道，同时进行css的解析，构建出css样式规则应用到DOM树上，然后进行一定的布局处理，最后根据这棵渲染树在浏览器窗口进行绘制。</li>
 </ol>
 
       
@@ -398,7 +428,7 @@ HTTP协议是互联网上应用最为广泛的一种网络协议，也是浏览�
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP简介"><span class="toc-number">1.</span> <span class="toc-text">HTTP简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP状态码"><span class="toc-number">2.</span> <span class="toc-text">HTTP状态码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#每个状态码的含义"><span class="toc-number">2.1.</span> <span class="toc-text">每个状态码的含义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用状态码："><span class="toc-number">2.2.</span> <span class="toc-text">常用状态码：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#经典问题"><span class="toc-number">3.</span> <span class="toc-text">经典问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题1"><span class="toc-number">3.1.</span> <span class="toc-text">问题1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解析"><span class="toc-number">3.1.1.</span> <span class="toc-text">解析</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP简介"><span class="toc-number">1.</span> <span class="toc-text">HTTP简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP协议族"><span class="toc-number">2.</span> <span class="toc-text">TCP/IP协议族</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分层管理"><span class="toc-number">2.1.</span> <span class="toc-text">分层管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP通信传输流"><span class="toc-number">2.2.</span> <span class="toc-text">TCP/IP通信传输流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP、TCP和DNS"><span class="toc-number">2.3.</span> <span class="toc-text">IP、TCP和DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URI和URL"><span class="toc-number">2.4.</span> <span class="toc-text">URI和URL</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP状态码"><span class="toc-number">3.</span> <span class="toc-text">HTTP状态码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#每个状态码的含义"><span class="toc-number">3.1.</span> <span class="toc-text">每个状态码的含义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用状态码："><span class="toc-number">3.2.</span> <span class="toc-text">常用状态码：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#经典问题"><span class="toc-number">4.</span> <span class="toc-text">经典问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题1"><span class="toc-number">4.1.</span> <span class="toc-text">问题1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解析"><span class="toc-number">4.1.1.</span> <span class="toc-text">解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题2"><span class="toc-number">4.2.</span> <span class="toc-text">问题2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解析-1"><span class="toc-number">4.3.</span> <span class="toc-text">解析</span></a></li></ol></li></ol>
         
     </div>
     <style>
