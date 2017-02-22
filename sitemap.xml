@@ -2,17 +2,17 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <sitemap>
-        <loc>http://yoursite.com/post-sitemap.xml</loc>
+        <loc>http://valar.me/post-sitemap.xml</loc>
         <lastmod>2017-02-22T06:26:58.000Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://yoursite.com/page-sitemap.xml</loc>
+        <loc>http://valar.me/page-sitemap.xml</loc>
         <lastmod>2017-02-22T06:02:50.000Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://yoursite.com/tag-sitemap.xml</loc>
+        <loc>http://valar.me/tag-sitemap.xml</loc>
         <lastmod>2017-02-22T06:26:56.000Z</lastmod>
     </sitemap>
 
