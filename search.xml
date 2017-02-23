@@ -4,6 +4,145 @@
   
     
     <entry>
+      <title><![CDATA[蜜汁this]]></title>
+      <url>http://valar.me/2017/02/23/about-this/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>在JavaScript（以下称js）中，this是指向当前函数中正在执行的上下文环境。js有四种不同的函数调用类型：</p>
+</blockquote>
+<ol>
+<li>函数调用：alert(‘hello world’);</li>
+<li>方法调用：console.log(‘hello world’);</li>
+<li>构造函数调用：new RegExp(‘\d’);</li>
+<li>间接调用：alert.call(undefined,’hello world’);</li>
+</ol>
+<blockquote>
+<p>理解this的关键在于理解不同的调用类型以及他是如何影响上下文环境的。</p>
+</blockquote>
+<h1 id="函数调用中的this"><a href="#函数调用中的this" class="headerlink" title="函数调用中的this"></a><span style="color: rgb(51, 153, 102);" data-mce-style="color: #339966;">函数调用中的this</span></h1><h2 id="非严格模式下："><a href="#非严格模式下：" class="headerlink" title="非严格模式下："></a><span style="color: rgb(0, 0, 0);" data-mce-style="color: #000000;">非严格模式下：</span></h2><blockquote>
+<p>this在函数调用中是全局对象，全局对象取决于当前执行环境，在浏览器中全局对象就是window。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span> === <span class="built_in">window</span>);<span class="comment">//true</span></div><div class="line">	<span class="keyword">this</span>.myNumber = <span class="number">14</span>;<span class="comment">//在全局对象中添加myNumber属性</span></div><div class="line">	<span class="built_in">console</span>.log(a + b);</div><div class="line">&#125;;</div><div class="line">sum(<span class="number">15</span>, <span class="number">16</span>);<span class="comment">//31</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.myNumber);<span class="comment">//14</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><span id="mce_3_start" style="overflow:hidden;line-height:0px" data-mce-type="bookmark" data-mce-style="overflow:hidden;line-height:0px">﻿</span>this在任何函数作用域以外调用时（最外层作用域：全局执行上下文环境），也会涉及到全局对象。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span> === <span class="built_in">window</span>); <span class="comment">//true</span></div><div class="line"><span class="keyword">this</span>.myString = <span class="string">'Hello World!'</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.myString);<span class="comment">//Hello World! ﻿​</span></div></pre></td></tr></table></figure>
+<h2 id="严格模式下："><a href="#严格模式下：" class="headerlink" title="严格模式下："></a>严格模式下：</h2><p>严格模式由ES5.1标准引进，用来限制js的一些异常处理，提供更好的安全性和更强的错误检查机制。</p>
+<blockquote>
+<p>this在严格模式下的函数调用中是undefined</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiply</span>(<span class="params">a ,b</span>) </span>&#123;</div><div class="line"><span class="meta">	'use strict'</span>; <span class="comment">//开启严格模式</span></div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span> === <span class="literal">undefined</span>); <span class="comment">//true</span></div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//undefined</span></div><div class="line">	<span class="keyword">return</span> a * b;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">console</span>.log(multiply(<span class="number">2</span>, <span class="number">6</span>));<span class="comment">//12</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>严格模式不仅在当前作用域起到作用，他还会影响内部作用域，即内部声明的一切内部函数的作用域。（内部函数继承严格模式）</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">execute</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">	'use strict'</span>;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">concat</span>(<span class="params">str1, str2</span>) </span>&#123;</div><div class="line">		<span class="comment">//内部函数也是严格模式</span></div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span> === <span class="literal">undefined</span>); <span class="comment">// true</span></div><div class="line">		<span class="built_in">console</span>.log(str1 + str2);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//在严格模式下调用 concat()</span></div><div class="line">	<span class="comment">//this在concat()下是undefined</span></div><div class="line">	concat(<span class="string">'Hello '</span>, <span class="string">'World!'</span>);<span class="comment">//Hello World</span></div><div class="line">&#125;;</div><div class="line">execute();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>严格和非严格混合使用时，this会有不同的表现</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">nonStrictSum</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">	<span class="comment">//非严格模式</span></div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span> === <span class="built_in">window</span>);<span class="comment">//true</span></div><div class="line">	<span class="built_in">console</span>.log(a + b);</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">strictSum</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line"><span class="meta">		'use strict'</span>;</div><div class="line">		<span class="comment">//严格模式</span></div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span> === <span class="literal">undefined</span>); <span class="comment">//true</span></div><div class="line">		<span class="built_in">console</span>(a + b);</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">nonStrictSum(<span class="number">5</span>, <span class="number">6</span>);<span class="comment">//11</span></div><div class="line">StrictSum(<span class="number">5</span>, <span class="number">7</span>);<span class="comment">//12</span></div></pre></td></tr></table></figure>
+<h2 id="函数调用中的陷阱："><a href="#函数调用中的陷阱：" class="headerlink" title="函数调用中的陷阱："></a>函数调用中的陷阱：</h2><blockquote>
+<p>误区：内部函数中的this等同于他的外部函数中的this</p>
+<p>正解：内部函数的上下文环境取决于调用环境，而不是外部函数的上下文环境</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> numbers = &#123;</div><div class="line">	<span class="attr">numberA</span>: <span class="number">5</span>,</div><div class="line">	<span class="attr">numberB</span>: <span class="number">10</span>,</div><div class="line">	<span class="attr">sum</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="comment">// 'use strict';</span></div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span> === numbers); <span class="comment">//true</span></div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">calculate</span>(<span class="params"></span>) </span>&#123;</div><div class="line">			<span class="comment">//严格模式下this是window/undefined</span></div><div class="line">			<span class="built_in">console</span>.log(<span class="keyword">this</span> === numbers);<span class="comment">//false</span></div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.numberA + <span class="keyword">this</span>.numberB;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">console</span>.log(calculate());</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.numberA + <span class="keyword">this</span>.numberB);<span class="comment">//15</span></div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">numbers.sum();<span class="comment">//严格模式下报错,非严格模式下结果是NaN</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>numbers.sum() 是对象内的一个方法调用，因此 sum 的上下文是 numbers 对象，而 calculate 函数定义在 sum 函数内，所以会误以为在 calculate 内 this 也指向的是 numbers。</p>
+<p>然而 calculate() 在函数调用（而不是作为方法调用）时，此时的 this 指向的是全局对象 window 或者在严格模式下指向 undefined ，即使外部函数 sum 拥有 numbers对象作上下文环境，它也没有办法影响到内部的 this。</p>
+<p>解决方法是使calculate函数被调用时的上下文同sum调用时一样，所以用.call()方法改变calculate改变sum的上下文环境。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> numbers = &#123;</div><div class="line">	<span class="attr">numberA</span>: <span class="number">5</span>,</div><div class="line">	<span class="attr">numberB</span>: <span class="number">10</span>,</div><div class="line">	<span class="attr">sum</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span> === numbers); <span class="comment">//true</span></div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">calculate</span>(<span class="params"></span>) </span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(<span class="keyword">this</span> === numbers);<span class="comment">//true</span></div><div class="line">			<span class="built_in">console</span>.log(<span class="keyword">this</span>.numberA + <span class="keyword">this</span>.numberB);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//使用.call()方法修改上下文环境</span></div><div class="line">		<span class="keyword">return</span> calculate.call(<span class="keyword">this</span>);</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">numbers.sum();<span class="comment">//15</span></div></pre></td></tr></table></figure>
+<h1 id="方法调用中的this"><a href="#方法调用中的this" class="headerlink" title="方法调用中的this"></a><span style="color: #339966;" data-mce-style="color: #339966;">方法调用中的this</span></h1><p><span style="color: #339966;" data-mce-style="color: #339966;"><img src="https://leanote.com/api/file/getImage?fileId=58783e11ab644175f4001b73" alt=""></span></p>
+<blockquote>
+<p>this在方法调用中代表的是调用该方法的对象本身</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> calc = &#123;</div><div class="line">	<span class="attr">num</span>: <span class="number">0</span>,</div><div class="line">	<span class="attr">increment</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span> === calc);<span class="comment">//true</span></div><div class="line">		<span class="keyword">this</span>.num += <span class="number">1</span>;</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.num);</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//方法调用，this指向calc</span></div><div class="line">calc.increment();<span class="comment">//1</span></div><div class="line">calc.increment();<span class="comment">//2</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>一个js对象继承方法来自于它自身的属性，当一个被继承方法在对象中调用时，上下文执行环境同样是对象本身。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myDog = <span class="built_in">Object</span>.create(&#123;</div><div class="line">	<span class="attr">sayName</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span> === myDog);<span class="comment">//true</span></div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line"><span class="comment">// myDog.name = 'Hehe';</span></div><div class="line"><span class="comment">//方法调用，this指向myDog</span></div><div class="line">myDog.sayName();<span class="comment">//Hehe</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>在ES5的class语法中，方法调用指的是实例本身</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Planet</span> </span>&#123;</div><div class="line">	<span class="keyword">constructor</span>(name) &#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	getName() &#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span> === earth);</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> earth = <span class="keyword">new</span> Planet(<span class="string">'Earth'</span>);</div><div class="line">earth.getName();<span class="comment">//Earth</span></div></pre></td></tr></table></figure>
+<h2 id="方法调用中的陷阱："><a href="#方法调用中的陷阱：" class="headerlink" title="方法调用中的陷阱："></a>方法调用中的陷阱：</h2><blockquote>
+<p>误区：一个对象中的方法可能会被提取抽离成一个变量。当时用这个变量调用方法时，开发者可能会误认为this指向的还是定义该方法时的对象</p>
+<p>正解：如果方法调用不依靠对象，那么就是一个函数调用，即 this 指向全局对象 object 或者在严格模式下为undefined。创建函数绑定可以修复上下文，使该方法被正确对象调用。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">type, legs</span>) </span>&#123;</div><div class="line">	<span class="keyword">this</span>.type = type;</div><div class="line">	<span class="keyword">this</span>.legs = legs;</div><div class="line">	<span class="keyword">this</span>.logInfo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span> === myCat);<span class="comment">//false</span></div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.type + <span class="string">' has '</span> + <span class="keyword">this</span>.legs + <span class="string">' legs'</span>);<span class="comment">//undefined has undefined legs</span></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> myCat = <span class="keyword">new</span> Animal(<span class="string">'Cat'</span>, <span class="number">4</span>);</div><div class="line">setTimeout(myCat.logInfo, <span class="number">1000</span>);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>开发者可能认为在 setTimeout 下调用 myCat.logInfo() 会打印出 myCat 对象的信息。但实际上这个方法被分离了出来作为了参数传入函数内 setTimeout(myCat.logInfo)，然后 1s 后会发生函数调用。当logInfo 被作为函数调用时，this 指向全局对象 window 或者在严格模式下为 undefined，因此对象信息没有正确地被打印。</p>
+<p>可以用bind()方法改变绑定myCat对象，改变上下文</p>
+</blockquote>
+<p><img src="https://leanote.com/api/file/getImage?fileId=58783e11ab644175f4001b75" alt=""></p>
+<blockquote>
+<p>此时，myCat.logInfo.bind(myCat) 返回的新函数调用里的 this 指向了 myCat。</p>
+</blockquote>
+<h1 id="构造函数调用中的this"><a href="#构造函数调用中的this" class="headerlink" title="构造函数调用中的this"></a><span style="color: #339966;" data-mce-style="color: #339966;">构造函数调用中的this</span></h1><blockquote>
+<p>this在构造函数调用时指向新创建的对象</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span> <span class="keyword">instanceof</span> Foo); <span class="comment">//true</span></div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//Foo&#123;&#125;</span></div><div class="line">	<span class="keyword">this</span>.property = <span class="string">'Default Value'</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//构造函数调用</span></div><div class="line"><span class="keyword">var</span> fooInstance = <span class="keyword">new</span> Foo();</div><div class="line"><span class="built_in">console</span>.log(fooInstance.property);<span class="comment">//Default Value</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>new Foo() 建立构造器调用，它的上下文环境为 fooInstance，在 Foo 对象中初始化了 this.property 这个属性并赋予初始值。</p>
+</blockquote>
+<h2 id="构造函数中的陷阱："><a href="#构造函数中的陷阱：" class="headerlink" title="构造函数中的陷阱："></a>构造函数中的陷阱：</h2><blockquote>
+<p>一些js函数创建实例，不仅仅可以使用构造器的形式调用也可以利用函数调用。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> reg1 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\w+'</span>);</div><div class="line"><span class="keyword">var</span> reg2 = <span class="built_in">RegExp</span>(<span class="string">'\\w+'</span>);</div><div class="line"></div><div class="line">reg1 iinstanceof <span class="built_in">RegExp</span>;<span class="comment">//true</span></div><div class="line">reg2 iinstanceof <span class="built_in">RegExp</span>;<span class="comment">//treu</span></div><div class="line">reg1.source === reg2.source;<span class="comment">//true</span></div></pre></td></tr></table></figure>
+<p>当执行 new RegExp()和RegExp()时，js创建了两个相等的普通表达式对象。</p>
+<p>但是使用函数调用创建对象会产生潜在的问题（包括工厂模式），当时去了new关键字，一些构造器会取消初始化对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vehicle</span>(<span class="params">type, wheelsCount</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);<span class="comment">//window</span></div><div class="line">	<span class="keyword">this</span>.type = type;</div><div class="line">	<span class="keyword">this</span>.wheelsCount = wheelsCount;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//函数调用</span></div><div class="line"><span class="keyword">var</span> car = Vehicle(<span class="string">'Car'</span>, <span class="number">5</span>);</div><div class="line"><span class="built_in">console</span>.log(car.type);</div><div class="line"><span class="built_in">console</span>.log(car.wheelsCount); <span class="comment">//5</span></div><div class="line"><span class="built_in">console</span>.log(car === <span class="built_in">window</span>);<span class="comment">//true</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Vehicle 是一个在对象上设置了 type 和 wheelsCount 属性的函数。</p>
+<p>当执行了 Vehicle(‘Car’, 4) 时，会返回对象 car，它拥有正确的属性值：car.type 指向Car，car.wheelsCount 指向 4，开发者会误以为这样创建初始化对象没有什么问题。<br>然而，当前执行的是函数调用，因此 this 指向的是 window 对象，所以它设置的属性其实是挂在 window对象上的，这样是完全错误的，它并没有创建一个新对象。</p>
+</blockquote>
+<h1 id="间接调用中的this"><a href="#间接调用中的this" class="headerlink" title="间接调用中的this"></a><span style="color: #339966;" data-mce-style="color: #339966;">间接调用中的this</span></h1><blockquote>
+<p>this是间接调用中.call()或者.apply()的第一个参数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> rabbit = &#123;<span class="attr">name</span>: <span class="string">'White Rabbit'</span>&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">concatName</span>(<span class="params">string,string1</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span> === rabbit);<span class="comment">//true</span></div><div class="line">	<span class="built_in">console</span>.log(string + string1 + <span class="keyword">this</span>.name);</div><div class="line">&#125;</div><div class="line"><span class="comment">//间接调用</span></div><div class="line">concatName.call(rabbit, <span class="string">'Hello '</span>, <span class="string">'Bye '</span>);<span class="comment">//Hello Bye White Rabbit</span></div><div class="line">concatName.apply(rabbit, [<span class="string">'你好 '</span>, <span class="string">'再见 '</span>]);<span class="comment">//你好 再见 White Rabbit</span></div></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[js获取URL中的参数]]></title>
+      <url>http://valar.me/2017/02/23/url-params/</url>
+      <content type="html"><![CDATA[<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取url中的参数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUrlParam</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span> + name + <span class="string">"=([^&amp;]*)(&amp;|$)"</span>); <span class="comment">//构造一个含有目标参数的正则表达式对象</span></div><div class="line">    <span class="keyword">var</span> r = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);  <span class="comment">//匹配目标参数</span></div><div class="line">    <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">unescape</span>(r[<span class="number">2</span>]); <span class="keyword">return</span> <span class="literal">null</span>; <span class="comment">//返回参数值</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//举个栗子</span></div><div class="line"><span class="keyword">var</span> url = http:<span class="comment">//192.168.2.14:8084/wap/building/7/appointment.htm?id=7</span></div><div class="line"><span class="built_in">console</span>.log(getUrlParam(id))<span class="comment">//7</span></div></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[css设置文字溢出变省略号]]></title>
+      <url>http://valar.me/2017/02/23/text-overflow/</url>
+      <content type="html"><![CDATA[<h3 id="单行省略"><a href="#单行省略" class="headerlink" title="单行省略"></a>单行省略</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.title</span>&#123;</div><div class="line">    <span class="attribute">overflow</span>: hidden;</div><div class="line">    <span class="attribute">white-space</span>: nowrap;</div><div class="line">    <span class="attribute">text-overflow</span>: ellipsis;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="多行省略"><a href="#多行省略" class="headerlink" title="多行省略"></a>多行省略</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//webkit</div><div class="line">p &#123;</div><div class="line">    overflow : hidden;</div><div class="line">    text-overflow: ellipsis;</div><div class="line">    display: -webkit-box;</div><div class="line">    -webkit-line-clamp: 2;</div><div class="line">    -webkit-box-orient: vertical;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//-o-ellipsis-lastline</div><div class="line">p &#123;</div><div class="line">    overflow: hidden;</div><div class="line">    white-space: normal;</div><div class="line">    height: 3em;</div><div class="line">    text-overflow: -o-ellipsis-lastline;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//jquery跨浏览器</div><div class="line">$(".figcaption").each(function(i)&#123;</div><div class="line">    var divH = $(this).height();</div><div class="line">    var $p = $("p", $(this)).eq(0);</div><div class="line">    while ($p.outerHeight() &gt; divH) &#123;</div><div class="line">        $p.text($p.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));</div><div class="line">    &#125;;</div><div class="line">&#125;);﻿​</div></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[gulp给静态资源配置md5的踩坑历程]]></title>
       <url>http://valar.me/2017/02/22/gulp-rev/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -133,6 +272,56 @@
 <h2 id="使用Cookie的状态管理"><a href="#使用Cookie的状态管理" class="headerlink" title="使用Cookie的状态管理"></a>使用Cookie的状态管理</h2><p>由于HTTP是无状态的协议，那么需要记住状态的请求就需要用别的方法来实现，所以引入了cookie。</p>
 <p>cookie会根据从服务器端发送的响应豹纹内的首部字段信息，通知客户端保存Cookie，当下次客户端再往该服务器发送请求时，客户端会自动在请求报文中加入Cookie值后发出去。</p>
 <p>服务器端发现客户端发过来的cookie后，会去检查究竟是哪一个客户端发过来的连接请求，然后对比服务器上的记录，最后得到之前的状态信息。</p>
+<h1 id="HTTP报文内的HTTP信息"><a href="#HTTP报文内的HTTP信息" class="headerlink" title="HTTP报文内的HTTP信息"></a>HTTP报文内的HTTP信息</h1><p>用于HTTP协议交互的信息被称为HTTP报文，客户端的HTTP报文叫做请求报文，服务器端的叫做响应报文。</p>
+<p>HTTP报文大致可氛围报文首部和报文主体两块，两者由最初出现的空行（CR+LF）来划分，通常报文主体不是必须的。</p>
+<ul>
+<li>报文首部：服务器端或者客户端处理的请求或响应的内容及属性</li>
+<li>报文主体：应被发送的数据</li>
+<li>报文首部结构<ul>
+<li>请求报文：请求行、请求首部字段、通用首部字段、实体首部字段、其他</li>
+<li>响应报文：状态行、相应首部字段、通用首部字段、实体首部字段、其他<ul>
+<li>请求行：包含用于请求的方法，请求URI和HTTP版本</li>
+<li>状态航：包含表明响应结果的状态码，原因短语和HTTP版本</li>
+<li>首部字段：包含表示请求和响应的各种条件和属性的各类首部</li>
+<li>其他：可能包含HTTP的RFC里未定义的首部（Cookie等）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="编码提升传输速率"><a href="#编码提升传输速率" class="headerlink" title="编码提升传输速率"></a>编码提升传输速率</h2><p>HTTP在传输数据时可以按照数据原貌直接传输，但是在处理大量访问请求时可以通过编码传输，但是编码要计算机完成，因此会消耗CPU资源</p>
+<h3 id="报文主体和实体主体的差异"><a href="#报文主体和实体主体的差异" class="headerlink" title="报文主体和实体主体的差异"></a>报文主体和实体主体的差异</h3><ul>
+<li>报文：是HTTP通信的基本单位，由8个字节流组成，通过HTTP通信传输</li>
+<li>实体：作为请求或相应的有效载荷数据（补充项）被传输，其内容由实体首部和实体主体组成</li>
+<li>HTTP报文的主体用来传输请求或响应的实体主体</li>
+<li>通常报文主体等于实体主体，只有在传输中进行编码操作时实体主体的内容发生变化，才导致它和它的报文主体产生差异</li>
+</ul>
+<h3 id="编码种类"><a href="#编码种类" class="headerlink" title="编码种类"></a>编码种类</h3><ul>
+<li>内容编码：指明应用在实体内容上的编码格式，并保持实体信息原样压缩，内容编码后的实体由客户端接收并非责编码。</li>
+<li>分块传输编码：HTTP通信过程中，请求的编码实体资源没传完之前浏览器没办法显示请求页面，所以在传输大容量数据时，把数据分割成多块，能让浏览器逐步显示页面。由接收的客户端来解码。</li>
+<li>多部分对象集合：发送一份报文主体可以含有多类型实体，通常是在图片或文本文件等上传时使用<ul>
+<li><code>Content-Type: multipart/form-data</code>：在Web表单文件上传时使用</li>
+<li><code>Content-Type: multipart/byteranges</code>：状态码206（部分内容）响应报文包含了多个范围的内容时使用</li>
+</ul>
+</li>
+<li>使用boundary字符串来划分多部分对象集合指明的各类实体</li>
+</ul>
+<h2 id="获取部分内容的范围请求"><a href="#获取部分内容的范围请求" class="headerlink" title="获取部分内容的范围请求"></a>获取部分内容的范围请求</h2><ul>
+<li>下载过程中如果遇到网络中断，就必须从头开始，为了解决这个问题，需要一种可恢复的机制，使其能从之前下载中断处回复下载，也就是我们常说的断点续传。这种指定范围发送的请求叫做范围请求</li>
+<li>执行范围请求时，会用到首部字段Range来制定资源的byte范围 <code>Range: bytes=5001-10000</code> 或 <code>Range: bytes=5001-</code> <code>Range: bytes=-3000，5001-10000</code> 多种写法。</li>
+<li>范围请求时，响应会反悔状态码206，响应也会在首部字段<code>Content-Type</code>标明<code>multipart/byteranges</code>后返回响应报文。</li>
+<li>如果服务器无法响应范围请求，则会返回状态码200 OK和完整的实体内容</li>
+</ul>
+<h2 id="内容协商"><a href="#内容协商" class="headerlink" title="内容协商"></a>内容协商</h2><ul>
+<li>内容协商是指客户端和服务器端就响应的资源内容进行交涉，然后提供给客户端最为合适的资源。一般以响应资源的语言、字符集、编码方式等作为判断的基准。比如访问www.google.com，浏览器默认是英文就反回英文版页面，是中文就返回中文版页面</li>
+<li>包含在请求报文的某些首部字段就是判断的基准，比如：Accept、Accept-Charset、Accept-Encoding、Accept-Language、Content-Language</li>
+<li>三种类型<ul>
+<li>服务器驱动协商：服务器端根据请求的首部字段作为参考，在服务器端自动处理</li>
+<li>客户端驱动协商：用户通过设置浏览器、js脚本等方式，比如切换浏览器类型、PC版页面活着手机版页面等</li>
+<li>透明协商：服务器端和客户端各自进行内容协商。</li>
+</ul>
+</li>
+</ul>
 <h1 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h1><h2 id="每个状态码的含义"><a href="#每个状态码的含义" class="headerlink" title="每个状态码的含义"></a>每个状态码的含义</h2><ul>
 <li>1xx（临时响应）：表示临时响应并需要请求者继续执行操作</li>
 <li>2xx（成功）：表示成功处理了请求</li>
