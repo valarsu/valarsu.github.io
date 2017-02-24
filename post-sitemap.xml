@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://valar.me/2017/02/20/about-http/</loc>
+        <lastmod>2017-02-24T07:35:53.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://valar.me/2017/02/23/about-this/</loc>
         <lastmod>2017-02-23T07:52:31.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -25,14 +33,6 @@
     <url>
         <loc>http://valar.me/2017/02/23/text-overflow/</loc>
         <lastmod>2017-02-23T07:32:19.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://valar.me/2017/02/20/about-http/</loc>
-        <lastmod>2017-02-23T07:18:46.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
