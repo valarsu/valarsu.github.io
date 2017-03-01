@@ -4,6 +4,47 @@
   
     
     <entry>
+      <title><![CDATA[关于apply、call和bind()]]></title>
+      <url>http://valar.me/2017/03/01/apply-bind-call/</url>
+      <content type="html"><![CDATA[<h1 id="call和apply"><a href="#call和apply" class="headerlink" title="call和apply"></a>call和apply</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>js中，<code>call</code>和<code>apply</code>都是为了改变某个函数运行时的上下文而存在的，就是为了改变函数体内部的<code>this</code>指向。</p>
+<p>函数存在<code>定义时上下文</code>、<code>运行时上下文</code>和<code>上下文是可以改变的</code>这样的概念。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fruits</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line"></div><div class="line">fruits.prototype = &#123;</div><div class="line">    <span class="attr">color</span>: <span class="string">'red'</span>,</div><div class="line">    <span class="attr">say</span>: <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"My color is "</span> + <span class="keyword">this</span>.color + a * b);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> apple = <span class="keyword">new</span> fruits();</div><div class="line">apple.say(<span class="number">3</span>, <span class="number">4</span>);<span class="comment">//My color is red12;</span></div></pre></td></tr></table></figure>
+<p>如果我们有一个对象，不想对他重新定义<code>say</code>方法，那么可以通过<code>call</code>或者<code>apply</code>来使用apple的<code>say</code>方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> banana = &#123;</div><div class="line">    <span class="attr">color</span>: <span class="string">'yellow'</span></div><div class="line">&#125;;</div><div class="line">apple.say.call(banana, <span class="number">4</span>, <span class="number">5</span>);<span class="comment">//My color is yellow 20</span></div><div class="line">apple.say.apply(banana, [<span class="number">5</span>, <span class="number">6</span>]);<span class="comment">//My color is yellow 20</span></div></pre></td></tr></table></figure>
+<p>所以可以看出，<code>call</code>和<code>apply</code>是为了动态改变this而出现的，当一个object没有某个方法时，但是其他的对象有，那么可以借助<code>call</code>或者<code>apply</code>,用其他方法来操作。</p>
+<h2 id="call和apply的区别"><a href="#call和apply的区别" class="headerlink" title="call和apply的区别"></a><code>call</code>和<code>apply</code>的区别</h2><p>作用完全一样，但是接受参数的方式不一样<code>var func = function (arg1, arg2){}</code>可以通过以下方式调用：</p>
+<ul>
+<li><code>func.call(this, arg1, arg2)</code></li>
+<li><code>func.apply(this, [arg1, arg2])</code></li>
+</ul>
+<p>其中<code>this</code>是指你想指定的上下文，可以是任意一个js对象，<code>call</code>需要把参数按顺序传递进去，而<code>apply</code>要把参数放在数组里。<br>因为某些函数的参数数量是不定的，所以一般在知道数组数量时用call，不确定时，用apply将参数push进数组传递。也可以通过arguments这个数组来遍历所有参数。</p>
+<h1 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p><code>bind()</code> 方法与 <code>apply</code> 和 <code>call</code> 很相似，也是可以改变函数体内 <code>this</code> 的指向。</p>
+<p>平时我们会使用 <code>_this</code> , <code>that</code> , <code>self</code> 等保存 <code>this</code> ，这样我们可以在改变了上下文之后继续引用到它。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> foo = &#123;</div><div class="line">    <span class="attr">bar</span> : <span class="number">1</span>,</div><div class="line">    <span class="attr">eventBind</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">        $(<span class="string">'.someClass'</span>).on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">            <span class="comment">/* Act on the event */</span></div><div class="line">            <span class="built_in">console</span>.log(_this.bar); <span class="comment">//1</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于 Javascript 特有的机制，上下文环境在 <code>eventBind:function(){ }</code> 过渡到 <code>$(&#39;.someClass&#39;).on(&#39;click&#39;,function(event) { })</code> 发生了改变，保存<code>this</code>方法很常见，使用<code>bind()</code>可以更好的解决这个问题。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> foo = &#123;</div><div class="line">    <span class="attr">bar</span> : <span class="number">1</span>,</div><div class="line">    <span class="attr">eventBind</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        $(<span class="string">'.someClass'</span>).on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">            <span class="comment">/* Act on the event */</span></div><div class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.bar); <span class="comment">//1</span></div><div class="line">        &#125;.bind(<span class="keyword">this</span>));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里面，<code>bind()</code>创建了一个函数，当这个click事件在被调用的时候，他的<code>this</code>关键词会被设置成被传入的值，因此，我们传入想要的上下文环境的<code>this</code>到<code>bind()</code>函数中，然后被调用的时候，<code>this</code>的环境就会变了。</p>
+<h1 id="apply、call、bind-的比较"><a href="#apply、call、bind-的比较" class="headerlink" title="apply、call、bind()的比较"></a>apply、call、bind()的比较</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">x</span>: <span class="number">81</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> foo = &#123;</div><div class="line">    <span class="attr">getX</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.x;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(foo.getX.bind(obj)()); <span class="comment">//81</span></div><div class="line"><span class="built_in">console</span>.log(foo.getX.call(obj)); <span class="comment">//81</span></div><div class="line"><span class="built_in">console</span>.log(foo.getX.apply(obj)); <span class="comment">//81</span></div></pre></td></tr></table></figure>
+<p>输出都是81，但是注意<code>bind()</code>方法，后面加了括号。</p>
+<p>所以如果想让改变<code>this</code>指向之后不立即执行，可以用<code>bind()</code>方法。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>三种方法都是用来改变<code>this</code>指向的</li>
+<li>第一个参数都是<code>this</code>要指向的对象</li>
+<li>都可以利用后续参数传递</li>
+<li><code>bind</code>返回对应函数，不立即执行，<code>apply/call</code>是立即执行</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[蜜汁this]]></title>
       <url>http://valar.me/2017/02/23/about-this/</url>
       <content type="html"><![CDATA[<blockquote>
