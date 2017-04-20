@@ -47,9 +47,8 @@ JS跨域"><meta name="keywords" content="Hexo,HTML,Ben,CSS,安卓,android,Linux,
 </li>
 <li>发起POST请求时，只允许<code>Content-Type</code>为<code>application/x-www-form-urlencoded,multipart/form-data,text/plain</code>。</li>
 </ul>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/meG6Vo0MevgIZ3v0yDEHrPcv5XrcDaic3WazqT8gXww7KIgLWdSY4VwMbwZpicMpVGlFLHZyya1XCb160OzqPYSQ/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt=""><br>浏览器发送一个带有Orgin字段的HTTP请求头，用来表明请求来源。服务器的Access-Control-Allow-Origin响应头表明该服务器允许哪些源的访问，一旦不匹配，浏览器就会拒绝资源的访问。大部分情况，大家都喜欢将Access-Control-Allow-Origin设置为*,即任意外域都能访问该资源。但是，还是推荐做好访问控制，以保证安全性。</p>
+<p>浏览器发送一个带有Orgin字段的HTTP请求头，用来表明请求来源。服务器的Access-Control-Allow-Origin响应头表明该服务器允许哪些源的访问，一旦不匹配，浏览器就会拒绝资源的访问。大部分情况，大家都喜欢将Access-Control-Allow-Origin设置为*,即任意外域都能访问该资源。但是，还是推荐做好访问控制，以保证安全性。</p>
 <h3 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h3><p>非简单请求在正是发送请求数据之前，浏览器会先发送一个带有“OPTIONS”方法的亲求来确保该请求对于目标站点来说事安全的。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/meG6Vo0MevgIZ3v0yDEHrPcv5XrcDaic38IBz0oHf6uVbA7cv5Mj14a2CefchcmQtBW2FN0l1w0dH7IRCKicGzew/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt=""></p>
 <p>浏览器会在预检请求中，多发送两个字段<code>Access-Control-Request-Method</code>和<code>Access-Control-Request-Headers</code>,前者用于告知服务器实际请求所用的方法，后者用于告知服务器实际请求所携带的自定义请求首部字段。然后，服务器将根据请求头的信息来判断是否允许该请求。</p>
 <p>针对非简单请求，服务器端可以设置几个相关字段:</p>
 <ul>
