@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://valar.me/2017/04/20/about-cross-domain/</loc>
+        <lastmod>2017-04-20T02:54:11.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://valar.me/2017/04/19/about-JSON/</loc>
         <lastmod>2017-04-19T03:09:46.000Z</lastmod>
         <changefreq>weekly</changefreq>
