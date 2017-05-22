@@ -4,6 +4,53 @@
   
     
     <entry>
+      <title><![CDATA[vue踩坑日记]]></title>
+      <url>http://valar.me/2017/05/22/vue-experience/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>实践是检验真理的唯一标准，很多新东西不是你觉得学会了就真的会了，或多或少会踩点坑，坑踩的多了，你就习惯了😂。<br>– 我随便说的</p>
+</blockquote>
+<p>最近接触了一些vue相关的项目<code>（vue-cli+webpack）</code>，根据踩过的坑，稍微总结了一下，上干货。</p>
+<ul>
+<li><p>代码规格要求很严</p>
+<ul>
+<li>最开始的时候，发现vue对代码格式的要求近乎变态，一个空格有错误都会导致整个项目编译中断。后来搞清楚了，是因为<code>vue-cli</code>脚手架生成的配置文件自动增加了<code>eslint</code>插件，这个插件的作用就是为了保证代码统一风格，必要的时候也回避免一些低级错误。如果是改别人的代码，而且情况比较紧急，一条一条改很麻烦，那么可以暂时关闭<code>eslint</code>。方法是将<code>webpack.base.conf.js</code>内的rules 里面的<code>eslint-loader</code>部分去掉。<br><img src="https://leanote.com/api/file/getImage?fileId=5922b31cab64410d7e0002ea" alt="具体图示"></li>
+</ul>
+</li>
+</ul>
+<p>注：建议等有空闲时间的时候再把他改回来，养成一个良好的代码风格很重要的😀。</p>
+<ul>
+<li><p>路径引用中的<code>@</code>符</p>
+<ul>
+<li><code>vue-cli</code>在生成项目的时候，会默认把静态文件的 <code>src</code>目录用<code>@</code>符号命名。那在项目引用的时候可以用<code>@</code>代替 <code>src</code> 文件夹，这样看起来比较直观。实际上这个<code>@</code>符号也可以换成其他字符串，这个就看个人喜好了。</li>
+</ul>
+</li>
+<li><p>cnpm 换回 npm</p>
+<ul>
+<li>vue 项目中，是用 cnpm 装的依赖可能会报错导致项目编译中断，具体的报错信息已经找不到了，解决方法是将 cnpm 换回 npm，如果觉得慢，就把 npm 的源换成淘宝的源。因为 cnpm 和 npm 生成的<code>node_modules</code>文件夹内的依赖插件的 结构不同，所以感觉 cnpm 会看起来稍微有点那么不正经。建议弃 cnpm，一直用 npm。</li>
+</ul>
+</li>
+<li><p>首页白屏时间过长</p>
+<ul>
+<li>执行 <code>npm run build</code>打包项目之后，会生成 <code>index.html</code>、<code>app.css</code>、<code>app.js</code>、<code>manifest.js</code>和<code>vendor.js</code>。这里重点提一下<code>vendor.js</code>，这个文件是项目所依赖的所有公共库打包成的文件，如果依赖的公共库过多或者体积过大，都会造成<code>vendor.js</code>体积过大，而这个文件的大小对项目的性能有直接的关系，特别是移动端，理论上最好不要超过200kb，太大了又浪费流量又浪费等待时间。这里有一种方法，启用 gzip 压缩就可以极大的缩小文件体积，但是<code>vue-cli</code>生成的项目虽然有配置 gzip，但是需要条件达成才可以，代码在<code>webpack.prod.conf.js</code>里面。我比较笨，没有找到触发这个的条件。所以就用了一种简单粗暴的方法，将gzip 相关的内容放到<code>plugins</code>的配置里面，让他强制执行，这样就可以一直启用 gzip 压缩，使依赖文件体积变小，这个很大程度上能解决首页白屏时间过长的问题。<br><img src="https://leanote.com/api/file/getImage?fileId=5922c214ab6441107b0004b7" alt="具体图示"></li>
+</ul>
+</li>
+<li>父子组件之间简单的信息传递<ul>
+<li>父子组件间信息传递一直是这类组件化的框架的比较麻烦的问题，通常来说，小项目直接用 <code>props</code> 属性传递，大项目就要用到<code>vuex</code>来控制。我在实际运用的过程中发现父组件给子组件之间传递信息可以用<code>props</code>，但是多多少少也有点麻烦。我这里用了一种投机取巧的方法，利用storage 来存储需要传递的参数，因为 storage 是全局的，这样做也会起到需要用到这个属性的组件同步的作用。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 总结 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于跨域]]></title>
       <url>http://valar.me/2017/04/20/about-cross-domain/</url>
       <content type="html"><![CDATA[<blockquote>
